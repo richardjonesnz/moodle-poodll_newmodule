@@ -1,0 +1,122 @@
+.mod_NEWMODULE_center {
+	text-align: center;
+}
+.mod_NEWMODULE_center > div, .mod_NEWMODULE_center > table /* insert any other block-level elements here */ {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.mod_NEWMODULE_listbuttons input[type="submit"]{
+	width: 400px;
+}
+
+.mod_NEWMODULE_actionbuttons {
+	display: flex;
+	float: right;
+}
+
+.mod_NEWMODULE_recording_cont {
+	display: block;
+	margin: auto;
+	text-align: center;
+	width: 100%;
+}
+.mod_NEWMODULE_passage_cont {
+	display: none;
+	line-height: 2em;
+	font-size: 1.5em;
+    border-style: double;
+    padding: 3px;
+    border-color: gold;
+	margin-top: 15px;
+}
+
+.mod_NEWMODULE_passage_finished {
+	background-color: #CCCCCC;
+	padding: 2px;
+}
+.mod_NEWMODULE_feedback_cont {
+	display: none;
+}
+.mod_NEWMODULE_error_cont {
+	display: none;
+}
+.mod_NEWMODULE_error_cont h3{
+	/* color: red; */
+}
+.mod_NEWMODULE_grading_player_cont {
+	/*color: blue;*/
+}
+.mod_NEWMODULE_hidden_player {
+	display: none;
+}
+.mod_NEWMODULE_hidden_player_button {
+  color: white;
+  border-color: cadetblue;
+  background-color: cadetblue;
+  border-style: solid;
+  border: 1px;
+  padding: 3px;
+  text-align: center;
+}
+.mod_NEWMODULE_hidden_player_button_active {
+	 color: white;
+	 border-color: tomato;
+	 background-color: tomato;
+}
+.mod_NEWMODULE_hidden_player_button_paused {
+	color: white;
+}
+.mod_NEWMODULE_hidden_player_button_playing{
+	color: white;
+}
+mod_NEWMODULE_grading_error_img {
+	color: blue;
+}
+.mod_NEWMODULE_grading_action_cont {
+	color: blue;
+	display: flex;
+}
+.mod_NEWMODULE_afterattempt_cont,
+.mod_NEWMODULE_ungraded_cont {
+	margin-left: auto;
+	margin-right: auto;
+	width: 40%;
+	text-align: center;
+	margin-top: 30px;
+}
+#mod_NEWMODULE_hider
+    {
+        display: none;
+		position:absolute;
+        top: 0%;
+        left: 0%;
+        width: 1600px;
+        height: 2000px;
+        margin-top: -1000px; /*set to a negative number 1/2 of your height*/
+        margin-left: 0px; /*set to a negative number 1/2 of your width*/
+        /*
+        z- index must be lower than pop up box
+       */
+        z-index: 99;
+       background-color:Black;
+       opacity: 0.6;
+    }
+
+#mod_NEWMODULE_progress_cont
+    {
+	display: none;
+    position:absolute;
+		text-align: center;
+        top: 50%;
+        left: 50%;
+        width:300px;
+        height:120px;
+        margin-top: -60px; /*set to a negative number 1/2 of your height*/
+        margin-left: -150px; /*set to a negative number 1/2 of your width*/
+        border: 1px solid #ccc;
+        border:  2px solid black;
+        z-index:100; 
+		background-color: white;
+
+    }
