@@ -1,11 +1,15 @@
-Read Aloud Module for Moodle
+Poodll New Module for Moodle
 =============
+This is a special NEWMODULE for creating Poodll based apps
 
-ReadAloud is an online testing system designed to assist teachers in evaluating their students reading fluency as WCPM(Word Count Per Minute) scores.
+1) Download/Clone as folder NEWMODULE in your Moodle mod directory
+2) Run a rename script, or tool, to turn all references to 'NEWMODULE' to your module name e.g 'mymodule'. hint: make it all lowercase and oneword
+3) Make sure any files in the renamed NEWMODULE directory are also renamed. Notably files under /classes/task /backup and /lang/en need to be renamed
+4) Strings in the lang/en/NEWMODULE.txt were called "NEW_MODULE" so replace "NEW_MODULE" with your nice human version of the module name, eg "My Module"
+5) After you install you will need a Poodll API key. Email for that. I will get you one
 
-The teacher assigns a reading passage and the student is required to record themselves reading the passage aloud. The teacher can later grade passages via the online interface and the student can see both their scores and the words that were marked as incorrectly spoken. The teacher can optionally enable a TTS(Text to Speech)  feature that allows the student to hear the correct pronunciation of the word.
 
-NB. Source files for the audio recorder are not in the download. That can be downloaded seperately from : https://www.dropbox.com/s/309ritx3v0l9seo/audio_recorder_source.zip?dl=0
+After it is all installed you will have a rough audio/video assignment with audio/video/text feedback capability. Its just all there, but not looking pretty. You will have some work to do
 
 Justin Hunt
 poodllsupport@gmail.com
