@@ -89,11 +89,12 @@ class utils{
     {
 
             $cache = \cache::make_from_params(\cache_store::MODE_APPLICATION, 'mod_NEWMODULE', 'token');
-            $tokenobject = $cache->get('recenttoken');
+            $tokenobject = $cache->get('recentpoodlltoken');
+            $tokenuser = $cache->get('recentpoodlluser');
 
             //if we got a token and its less than expiry time
             // use the cached one
-            if($tokenobject){
+            if($tokenobject && $tokenuser && $tokenuser==$apiuser){
                 if($tokenobject->validuntil == 0 || $tokenobject->validuntil > time()){
                     return $tokenobject->token;
                 }
@@ -117,7 +118,8 @@ class utils{
                     $tokenobject = new \stdClass();
                     $tokenobject->token = $token;
                     $tokenobject->validuntil = $validuntil;
-                    $cache->set('recenttoken', $tokenobject);
+                    $cache->set('recentpoodlltoken', $tokenobject);
+                    $cache->set('recentpoodlluser', $apiuser);
 
                 }else{
                     $token = '';
