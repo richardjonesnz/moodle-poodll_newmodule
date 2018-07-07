@@ -26,6 +26,7 @@
           <FIELD NAME="mediatype" TYPE="char" LENGTH="255" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" DEFAULT="none" COMMENT="media type"/>
           <FIELD NAME="recordertype" TYPE="char" LENGTH="255" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" DEFAULT="none" COMMENT="recorder type"/>
           <FIELD NAME="transcribe" TYPE="int" LENGTH="2" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"  DEFAULT="0" COMMENT="Whether to use AI on this activity" />
+          <FIELD NAME="subtitle" TYPE="int" LENGTH="2" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"  DEFAULT="0" COMMENT="Whether to subtitle on this activity" />
           <FIELD NAME="expiredays" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="100" SEQUENCE="false" />
           <FIELD NAME="region" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" DEFAULT="useast1" COMMENT="aws region" />
           <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" />
@@ -48,6 +49,7 @@
 		<FIELD NAME="filename" TYPE="char" LENGTH="255" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="the submission filename"/>
           <FIELD NAME="transcript" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="The text transcript." />
           <FIELD NAME="fulltranscript" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="The full TTS result (JSON)" />
+          <FIELD NAME="subtitles" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="The subtitles (VTT)" />
 		<FIELD NAME="sessionscore" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" COMMENT="the score for this session"/>
         <FIELD NAME="sessiontime" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" />
           <FIELD NAME="feedbacktext" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="Feedback text" />

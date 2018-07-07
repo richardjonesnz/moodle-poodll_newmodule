@@ -98,7 +98,7 @@ function save_to_moodle($filename,$themodule){
 
 //register an adhoc task to pick up transcripts
 function register_aws_task($activityid, $attemptid,$modulecontextid){
-    $s3_task = new \mod_NEWMODULE\task\_s3_adhoc();
+    $s3_task = new \mod_NEWMODULE\task\s3_adhoc();
     $s3_task->set_component(constants::M_FRANKY);
 
     $customdata = new \stdClass();

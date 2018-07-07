@@ -74,14 +74,19 @@ class utils{
 
     //we use curl to fetch transcripts from AWS and Tokens from cloudpoodll
     //this is our helper
-   public static function curl_fetch($url){
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_HEADER, false);
-        $data = curl_exec($curl);
-        curl_close($curl);
-        return $data;
+   public static function curl_fetch($url,$postdata=false)
+   {
+       $ch = curl_init($url);
+       curl_setopt($ch, CURLOPT_HEADER, false);
+       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+       if ($postdata) {
+           curl_setopt($ch, CURLOPT_POST, true);
+           curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+        }
+
+       $contents = curl_exec($ch);
+       curl_close($ch);
+       return $contents;
     }
 
     //We need a Poodll token to make this happen
@@ -100,9 +105,14 @@ class utils{
                 }
             }
 
-            // Send the request & save response to $resp
-            $token_url ="https://cloud.poodll.com/local/cpapi/poodlltoken.php?username=$apiuser&password=$apisecret&service=cloud_poodll";
-            $token_response = self::curl_fetch($token_url);
+            // Send the request & save response to $token_response
+            $token_url ="https://cloud.poodll.com/local/cpapi/poodlltoken.php";
+            $postdata = array(
+                'username' => $apiuser,
+                'password' => $apisecret,
+                'service'=>'cloud_poodll'
+            );
+            $token_response = self::curl_fetch($token_url,$postdata);
             if ($token_response) {
                 $resp_object = json_decode($token_response);
                 if($resp_object && property_exists($resp_object,'token')) {
@@ -130,6 +140,16 @@ class utils{
             }
             return $token;
     }
+
+   public static function fetch_s3_file($url)
+   {
+       $s3_file = self::curl_fetch($url, false);
+       if (!$s3_file || strpos($s3_file, "<Error><Code>AccessDenied</Code>") > 0) {
+           return false;
+       } else {
+            return $s3_file;
+       }
+   }
 
   public static function get_region_options(){
       return array(
@@ -178,6 +198,7 @@ class utils{
         $string_hints = base64_encode (json_encode($hints));
         $can_transcribe = \mod_NEWMODULE\utils::can_transcribe($moduleinstance);
         $transcribe = $can_transcribe  ? "1" : "0";
+        $subtitle=0;//$moduleinstance->subtitle
         switch($mediatype){
             case 'video':
                 $width="450";
@@ -207,6 +228,7 @@ class utils{
                 'data-timelimit'=> $timelimit,
                 'data-transcode'=>"1",
                 'data-transcribe'=>$transcribe,
+                'data-subtitle'=>$subtitle,
                 'data-transcribelanguage'=>$moduleinstance->language,
                 'data-expiredays'=>$moduleinstance->expiredays,
                 'data-region'=>$moduleinstance->region,

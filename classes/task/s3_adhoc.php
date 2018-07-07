@@ -56,26 +56,38 @@ class s3_adhoc extends \core\task\adhoc_task {
              return;
          }
 
-         $aigrade = new \mod_NEWMODULE\aigrade($cd->attemptid,$cd->modulecontextid);
-         if($aigrade){
-             if(!$aigrade->has_attempt()){
-                 $this->do_forever_fail('No attempt could be found',$trace);
-                 return;
-             }
-
-             if(!$aigrade->has_transcripts()){
-                 $this->do_retry_fail('Transcript appears to not be ready yet',$trace);
-                 return;
-             }else{
-                 //if we got here, we have transcripts and we do not need to come back
-                 $trace->output("Transcripts are fetched for " . $cd->attemptid . " ...all ok");
-                 return;
-             }
-
-         }else{
-             $this->do_forever_fail('Unable to create AI grade for some reason',$trace);
+         $submission = new \mod_NEWMODULE\submission($cd->attemptid,$cd->modulecontextid);
+         if(!$submission){
+             $this->do_forever_fail('No submission could be found',$trace);
              return;
          }
+
+         $mediaurl = $submission->fetch('mediaurl');
+         $transcripturl = $mediaurl . '.txt';
+         $fulltranscripturl = $mediaurl . '.json';
+         //we need add subtitles in settings, and pass that around before we use this
+         $subtitleurl = $mediaurl . '.vtt';
+
+         $transcript = \mod_NEWMODULE\utils::curl_fetch($transcripturl,false);
+         if(!$transcript){
+             $this->do_retry_fail('Transcript appears to not be ready yet',$trace);
+             return;
+         }else{
+             $fulltranscript = \mod_NEWMODULE\utils::curl_fetch($fulltranscripturl,false);
+            // $subtitles = \mod_NEWMODULE\utils::curl_fetch($subtitleurl,false);
+             $record= new \stdClass();
+             $record->id=$submission->fetch('id');
+             $record->transcript = $transcript;
+             $record->fulltranscript = $fulltranscript;
+             //$record->subtitles = $subtitles;
+
+            $DB->update_record(constants::M_USERTABLE,$record);
+             //if we got here, we have transcripts and have likely saved them
+             //if anything went wrong, retrying wont fix it. So we just close out
+             $trace->output("Transcripts are fetched for " . $cd->attemptid . " ...all ok");
+             return;
+         }
+
 	}
 
 	protected function do_retry_fail($reason,$trace){

@@ -51,13 +51,13 @@ class backup_NEWMODULE_activity_structure_step extends backup_activity_structure
         // root element describing NEWMODULE instance
         $oneactivity = new backup_nested_element(constants::M_MODNAME, array('id'), array(
             'course','name','intro','introformat','timelimit','passage','passageformat','welcome','welcomeformat','feedback','feedbackformat',
-            'grade','gradeoptions','maxattempts','mingrade','language','transcribe','mediatype','recordertype','region','timecreated','timemodified'
+            'grade','gradeoptions','maxattempts','mingrade','language','transcribe','subtitle','mediatype','recordertype','region','timecreated','timemodified'
 			));
 		
 		//attempts
         $attempts = new backup_nested_element('attempts');
         $attempt = new backup_nested_element('attempt', array('id'),array(
-			constants::M_MODNAME ."id","courseid","userid","status","filename","feedbacktext","feedbacktextformat","feedbackaudio","feedbackvideo",
+			constants::M_MODNAME ."id","courseid","userid","status","filename","transcript","fulltranscript","subtitles","feedbacktext","feedbacktextformat","feedbackaudio","feedbackvideo",
 			"sessionscore","sessiontime","timecreated","timemodified"
 		));
 
