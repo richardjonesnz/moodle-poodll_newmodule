@@ -1,1 +1,7 @@
+Version 1.0.0 (Build 2018070700)
+-improved curl_fetch code which was erroring on localhost on windows(still needs proxy support)
+-added subtitle fields to DB and renderer and fetch task. But not to settings
+-fixed bug in ajaxhelper (_s3_adhoc =. s3_adhoc )
+
 Version 1.0.0 (Build 2018070100)
+-first release
